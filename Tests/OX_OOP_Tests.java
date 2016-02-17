@@ -2,6 +2,8 @@ package Tests;
 
 import OX.Player;
 import static org.assertj.core.api.Assertions.*;
+
+import OX.Table;
 import org.testng.annotations.Test;
 
 /**
@@ -29,5 +31,16 @@ public class OX_OOP_Tests {
         String mark = player.yourMark();
         //then
         assertThat(mark).isEqualTo(expected);
+    }
+    @Test
+    public static void playerOneMakesMove(){
+        //given
+        int fieldNumber = 1;
+        Player player = new Player();
+        player.chooseX();
+        //when
+        player.move(fieldNumber);
+        //then
+        assertThat(Table.field(fieldNumber)).isEqualTo(Table.X_MARK);
     }
 }
