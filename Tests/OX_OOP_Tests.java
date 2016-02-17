@@ -43,4 +43,15 @@ public class OX_OOP_Tests {
         //then
         assertThat(Table.field(fieldNumber)).isEqualTo(Table.X_MARK);
     }
+    @Test
+    public static void playerTwoMakesMove(){
+        //given
+        int fieldNumber = 1;
+        Player player = new Player();
+        player.chooseO();
+        //when
+        player.move(fieldNumber);
+        //then
+        assertThat(Table.field(fieldNumber)).isEqualTo(Table.O_MARK);
+    }
 }
