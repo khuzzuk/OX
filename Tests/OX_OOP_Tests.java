@@ -4,12 +4,18 @@ import OX.Player;
 import static org.assertj.core.api.Assertions.*;
 
 import OX.Table;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
  * Created by adrabik on 17.02.16.
  */
 public class OX_OOP_Tests {
+    private static Table table;
+    @BeforeMethod
+    public static void clearTable(){
+        table = new Table();
+    }
     @Test
     public static void playerChooseXMark(){
         //given
@@ -40,11 +46,36 @@ public class OX_OOP_Tests {
         String mark = null;
         //when
         try {
-            player = Player.playerSelection(wrongChoice);
+            player = Player.playerSelection(wrongChoice, table);
             mark = player.yourMark();
         }catch (Exception e) { assertThatExceptionOfType(IllegalArgumentException.class); }
         //then
         assertThat(mark).isNull();
+    }
+    @Test
+    public static void playerChooseOccupiedField(){
+        //given
+        int field = 1;
+        int choice1 = Table.X_MARK;
+        int choice2 = Table.O_MARK;
+        //when
+        table.mark(field,choice1);
+        table.mark(field,choice2);
+        //then
+        assertThat(table.field(field)).isEqualTo(choice1);
+    }
+    @Test
+    public static void playerChooseWrongField(){
+        //given
+        String field = "field";
+        Player player = Player.playerSelection(Player.X_SIGN, table);
+        //when
+        try {
+            player.move(field);
+            player = null;
+        }catch (Exception e) { assertThatExceptionOfType(IllegalArgumentException.class); }
+        //then
+        assertThat(player).isNotNull();
     }
 
     @Test
@@ -52,17 +83,17 @@ public class OX_OOP_Tests {
         //given
         int fieldNumber = 1;
         //when
-        Table.mark(fieldNumber, Table.X_MARK);
+        table.mark(fieldNumber, Table.X_MARK);
         //then
-        assertThat(Table.field(fieldNumber)).isEqualTo(Table.X_MARK);
+        assertThat(table.field(fieldNumber)).isEqualTo(Table.X_MARK);
     }
     @Test
     public static void playerTwoMakesMove(){
         //given
         int fieldNumber = 1;
         //when
-        Table.mark(fieldNumber, Table.O_MARK);
+        table.mark(fieldNumber, Table.O_MARK);
         //then
-        assertThat(Table.field(fieldNumber)).isEqualTo(Table.O_MARK);
+        assertThat(table.field(fieldNumber)).isEqualTo(Table.O_MARK);
     }
 }
