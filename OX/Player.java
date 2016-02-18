@@ -9,12 +9,16 @@ public class Player {
     private String mark;
     private Table table;
 
+    private Player(){}
+
     public void chooseX() {
         mark = X_SIGN;
+        table.setPlayer(this);
     }
 
     public void chooseO() {
         mark = O_SIGN;
+        table.setPlayer(this);
     }
 
     public String yourMark() {
@@ -30,10 +34,10 @@ public class Player {
 
     public static Player playerSelection(String choice, Table table) throws IllegalArgumentException {
         Player player = new Player();
+        player.table = table;
         if (choice.equals(X_SIGN)) player.chooseX();
         else if (choice.equals(O_SIGN)) player.chooseO();
         else throw new IllegalArgumentException("Wrong choice");
-        player.table = table;
         return player;
     }
 }

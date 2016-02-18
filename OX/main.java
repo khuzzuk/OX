@@ -1,22 +1,20 @@
-package Tests;
+package OX;
 
-import OX.Player;
-import OX.Table;
-import static org.assertj.core.api.Assertions.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by adrabik on 18.02.16.
  */
-public class OX_OOP_EndToEnd {
+public class main {
     public static Table table;
-    @BeforeMethod
     public static void clearTable(){
         table = new Table();
     }
-    @Test
-    public static void playerOneWins(){
+    public static void main(String[] args){
+        clearTable();
         Player player1 = Player.playerSelection(Player.X_SIGN, table);
         Player player2 = Player.playerSelection(Player.O_SIGN, table);
 

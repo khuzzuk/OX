@@ -3,6 +3,7 @@ package Tests;
 import OX.Player;
 import static org.assertj.core.api.Assertions.*;
 
+import OX.Sign;
 import OX.Table;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -19,8 +20,7 @@ public class OX_OOP_Tests {
     @Test
     public static void playerChooseXMark(){
         //given
-        Player player = new Player();
-        player.chooseX();
+        Player player = Player.playerSelection(Player.X_SIGN, table);
         String expected = "X";
         //when
         String mark = player.yourMark();
@@ -30,8 +30,8 @@ public class OX_OOP_Tests {
     @Test
     public static void playerChooseOMark(){
         //given
-        Player player = new Player();
-        player.chooseO();
+        Player player = Player.playerSelection(Player.O_SIGN, table);
+
         String expected = "O";
         //when
         String mark = player.yourMark();
@@ -56,8 +56,8 @@ public class OX_OOP_Tests {
     public static void playerChooseOccupiedField(){
         //given
         int field = 1;
-        int choice1 = Table.X_MARK;
-        int choice2 = Table.O_MARK;
+        Sign choice1 = Table.X_MARK;
+        Sign choice2 = Table.O_MARK;
         //when
         table.mark(field,choice1);
         table.mark(field,choice2);
