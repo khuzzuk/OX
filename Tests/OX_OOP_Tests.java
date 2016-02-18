@@ -33,13 +33,26 @@ public class OX_OOP_Tests {
         assertThat(mark).isEqualTo(expected);
     }
     @Test
+    public static void playerChooseWrongMark(){
+        //given
+        String wrongChoice = "1";
+        Player player;
+        String mark = null;
+        //when
+        try {
+            player = Player.playerSelection(wrongChoice);
+            mark = player.yourMark();
+        }catch (Exception e) { assertThatExceptionOfType(IllegalArgumentException.class); }
+        //then
+        assertThat(mark).isNull();
+    }
+
+    @Test
     public static void playerOneMakesMove(){
         //given
         int fieldNumber = 1;
-        Player player = new Player();
-        player.chooseX();
         //when
-        player.move(fieldNumber);
+        Table.mark(fieldNumber, Table.X_MARK);
         //then
         assertThat(Table.field(fieldNumber)).isEqualTo(Table.X_MARK);
     }
@@ -47,10 +60,8 @@ public class OX_OOP_Tests {
     public static void playerTwoMakesMove(){
         //given
         int fieldNumber = 1;
-        Player player = new Player();
-        player.chooseO();
         //when
-        player.move(fieldNumber);
+        Table.mark(fieldNumber, Table.O_MARK);
         //then
         assertThat(Table.field(fieldNumber)).isEqualTo(Table.O_MARK);
     }

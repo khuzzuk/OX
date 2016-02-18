@@ -25,4 +25,12 @@ public class Player {
             Table.mark(field, Table.X_MARK);
         else Table.mark(field, Table.O_MARK);
     }
+
+    public static Player playerSelection(String choice) throws IllegalArgumentException {
+        Player player = new Player();
+        if (choice.equals(X_SIGN)) player.chooseX();
+        else if (choice.equals(O_SIGN)) player.chooseO();
+        else throw new IllegalArgumentException("Wrong choice");
+        return player;
+    }
 }
